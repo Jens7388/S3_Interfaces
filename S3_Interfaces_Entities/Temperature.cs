@@ -7,14 +7,12 @@ namespace S3_Interfaces_Entities
     {
         public double C { get; set; }
 
-        public double F { get; set; }
-
-        private string text;
-
-        public Temperature(double c, double f)
+        public double F
         {
-            C = c;
-            F = f;
+            get
+            {
+                return (C * 9) / 5 + 32;
+            }
         }
 
         public string Text
@@ -23,13 +21,13 @@ namespace S3_Interfaces_Entities
             {
                 return GetText();
             }
-
-            set
-            {
-                text = value;
-            }
         }
 
+        public Temperature(double c)
+        {
+            C = c;
+
+        }
 
         public bool Equals(Temperature temp)
         {
@@ -86,41 +84,41 @@ namespace S3_Interfaces_Entities
         {
             if(C < -30)
             {
-                return "Ekstremt koldt";
+                return "ekstremt koldt";
             }
             else if(C >= -30 && C < -10)
             {
-                return "Meget koldt";
+                return "meget koldt";
             }
             else if(C >= -10 && C < 0)
             {
-                return "Koldt";
+                return "koldt";
             }
             else if(C >= 0 && C < 10)
             {
-                return "Køligt";
+                return "køligt";
             }
             else if(C >= 10 && C < 20)
             {
-                return "Mildt";
+                return "mildt";
             }
             else if(C >= 20 && C < 30)
             {
-                return "Varmt";
+                return "varmt";
             }
             else if(C >= 30 && C < 40)
             {
-                return "Meget varmt";
+                return "meget varmt";
             }
             else
             {
-                return "Ekstremt varmt";
+                return "ekstremt varmt";
             }
         }
 
         public override string ToString()
         {
-            return $"{C} {F} {Text}";
+            return $"{C}°, celsius {F}° fahrenheit, det er {Text}";
         }
     }
 }
