@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace S3_Interfaces_Entities
 {
-    public class Temperature: IEquatable<Temperature>
+    public class Temperature: IEquatable<Temperature>, IComparable<Temperature>, ICloneable
     {
         public double C { get; set; }
 
@@ -43,6 +44,29 @@ namespace S3_Interfaces_Entities
                 hash = hash * 23 + Text.GetHashCode();
                 return hash;
             }
+        }
+
+        public int CompareTo(Temperature temp)
+        {
+            int compResult = C.CompareTo(temp.C) + F.CompareTo(temp.F);
+            if(compResult >= 1)
+            {
+                return 1;
+            }
+            else if(compResult <= -1)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public virtual object Clone()
+        {
+            object clone = MemberwiseClone();
+            return clone;
         }
     }
 }

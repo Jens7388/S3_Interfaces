@@ -1,4 +1,5 @@
-﻿using System;
+﻿using S3_Interfaces_Entities;
+using System;
 
 namespace S3_Interfaces
 {
@@ -6,7 +7,9 @@ namespace S3_Interfaces
     {
         static void Main()
         {
-            Console.WriteLine();
+            Temperature temp1 = new Temperature(70, 69, "text");
+            Temperature temp2 = new Temperature(69, 69, "text");
+            Console.WriteLine(temp1.CompareTo(temp2));
         }
     }
 }
