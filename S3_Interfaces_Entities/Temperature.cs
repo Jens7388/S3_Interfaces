@@ -17,6 +17,7 @@ namespace S3_Interfaces_Entities
             F = f;
             Text = text;
         }
+
         public bool Equals(Temperature temp)
         {
             if(temp == null)
@@ -24,8 +25,8 @@ namespace S3_Interfaces_Entities
                 return false;
             }
             return C == temp.C &&
-                    F == temp.F &&
-                    string.Equals(Text, temp.Text);
+                   F == temp.F &&
+                   string.Equals(Text, temp.Text);
         }
 
         public override bool Equals(object obj)
@@ -48,25 +49,29 @@ namespace S3_Interfaces_Entities
 
         public int CompareTo(Temperature temp)
         {
-            int compResult = C.CompareTo(temp.C) + F.CompareTo(temp.F);
-            if(compResult >= 1)
+            int result = C.CompareTo(temp.C);
+
+            // Compare the other properties if the first matches
+            if(result == 0)
             {
-                return 1;
+                result = F.CompareTo(temp.F);
             }
-            else if(compResult <= -1)
+            if(result == 0)
             {
-                return -1;
+                result = Text.CompareTo(temp.Text);
             }
-            else
-            {
-                return 0;
-            }
+            return result;
         }
 
         public virtual object Clone()
         {
             object clone = MemberwiseClone();
             return clone;
+        }
+
+        public override string ToString()
+        {
+            return $"{C} {F} {Text}";
         }
     }
 }

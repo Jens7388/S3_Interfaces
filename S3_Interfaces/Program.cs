@@ -7,9 +7,13 @@ namespace S3_Interfaces
     {
         static void Main()
         {
-            Temperature temp1 = new Temperature(70, 69, "text");
-            Temperature temp2 = new Temperature(69, 69, "text");
+            Temperature temp1 = new Temperature(10, 50, "text");
+            Temperature temp2 = new Temperature(10, 50, "text");
+            Temperature temp3 = (Temperature)temp2.Clone();
             Console.WriteLine(temp1.CompareTo(temp2));
+            Console.WriteLine(temp3.ToString());
+            Console.WriteLine(temp3.Equals(temp2));
+            Console.ReadLine();
         }
     }
 }
