@@ -9,14 +9,27 @@ namespace S3_Interfaces_Entities
 
         public double F { get; set; }
 
-        public string Text { get; set; }
+        private string text;
 
-        public Temperature(double c, double f, string text)
+        public Temperature(double c, double f)
         {
             C = c;
             F = f;
-            Text = text;
         }
+
+        public string Text
+        {
+            get
+            {
+                return GetText();
+            }
+
+            set
+            {
+                text = value;
+            }
+        }
+
 
         public bool Equals(Temperature temp)
         {
@@ -67,6 +80,42 @@ namespace S3_Interfaces_Entities
         {
             object clone = MemberwiseClone();
             return clone;
+        }
+
+        private string GetText()
+        {
+            if(C < -30)
+            {
+                return "Ekstremt koldt";
+            }
+            else if(C >= -30 && C < -10)
+            {
+                return "Meget koldt";
+            }
+            else if(C >= -10 && C < 0)
+            {
+                return "Koldt";
+            }
+            else if(C >= 0 && C < 10)
+            {
+                return "Køligt";
+            }
+            else if(C >= 10 && C < 20)
+            {
+                return "Mildt";
+            }
+            else if(C >= 20 && C < 30)
+            {
+                return "Varmt";
+            }
+            else if(C >= 30 && C < 40)
+            {
+                return "Meget varmt";
+            }
+            else
+            {
+                return "Ekstremt varmt";
+            }
         }
 
         public override string ToString()
